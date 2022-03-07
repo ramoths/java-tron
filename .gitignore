@@ -55,3 +55,5 @@ Wallet
 
 # vm_trace
 /vm_trace/
+/actuator/bin
+bin

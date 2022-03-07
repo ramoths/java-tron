@@ -1,0 +1,49 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.tron</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    
+    <dependencies>
+        <!-- tron chainbase -->
+        <dependency>
+            <groupId>org.tron</groupId>
+            <artifactId>chainbase</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- tron protocol -->
+        <dependency>
+            <groupId>org.tron</groupId>
+            <artifactId>protocol</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- tron crypto -->
+        <dependency>
+            <groupId>org.tron</groupId>
+            <artifactId>crypto</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- tron zksnark-java-sdk -->
+        <dependency>
+            <groupId>com.github.tronprotocol</groupId>
+            <artifactId>zksnark-java-sdk</artifactId>
+        </dependency>
+        <!-- slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <!-- bcprov-jdk15on -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+        </dependency>
+        
+    </dependencies>
+
+
+
+</project>

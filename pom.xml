@@ -1,0 +1,205 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <!-- Identification -->
+    <groupId>org.tron</groupId>
+    <artifactId>parent</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <!-- Modules fils -->
+    <modules>
+        <module>crypto</module>
+        <module>protocol</module>
+        <module>common</module>
+    </modules>
+
+    <!-- Propriétés -->
+    <properties>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <junit.version>5.8.2</junit.version>
+        <bouncycastle.version>1.70</bouncycastle.version>
+        <jackson.version>2.13.1</jackson.version>
+        <httpasyncclient.version>4.1.5</httpasyncclient.version>
+        <commonscodec.version>1.15</commonscodec.version>
+        <jcommander.version>1.81</jcommander.version>
+        <typesafe.config.version>1.4.1</typesafe.config.version>
+        <rocksdb.version>6.27.3</rocksdb.version>
+        <protobuf.version>3.19.1</protobuf.version>
+        <jcip.version>1.0</jcip.version>
+        <grpc.version>1.43.1</grpc.version>
+        <commonproto.version>0.0.3</commonproto.version>
+    </properties>
+    
+    <!-- Profils -->
+    <profiles>
+        <!-- Windows/Linux -->
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <properties>
+                <leveldb.groupid>org.ethereum</leveldb.groupid>
+                <leveldb.artifactid>leveldbjni-all</leveldb.artifactid>
+                <leveldb.version>1.18.3</leveldb.version>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux</id>
+            <activation>
+                <os>
+                    <family>!windows</family>
+                </os>
+            </activation>
+            <properties>
+                <leveldb.groupid>org.fusesource.leveldbjni</leveldb.groupid>
+                <leveldb.artifactid>leveldbjni-all</leveldb.artifactid>
+                <leveldb.version>1.8</leveldb.version>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- Dépendances -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- JUnit -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+            </dependency>
+
+            <!-- BouncyCastle -->
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${bouncycastle.version}</version>
+            </dependency>
+
+            <!-- Jackson Databind -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <!-- Apache HTTP async client -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpasyncclient</artifactId>
+                <version>${httpasyncclient.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- Apache commons codec -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commonscodec.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <!-- JCommander -->
+            <dependency>
+                <groupId>com.beust</groupId>
+                <artifactId>jcommander</artifactId>
+                <version>${jcommander.version}</version>
+            </dependency>
+
+            <!-- Typesafe config -->
+            <dependency>
+                <groupId>com.typesafe</groupId>
+                <artifactId>config</artifactId>
+                <version>${typesafe.config.version}</version>
+            </dependency>
+
+            <!-- LevelDB -->
+            <dependency>
+                <groupId>${leveldb.groupid}</groupId>
+                <artifactId>${leveldb.artifactid}</artifactId>
+                <version>${leveldb.version}</version>
+            </dependency>
+
+            <!-- RocksDB -->
+            <dependency>
+                <groupId>org.rocksdb</groupId>
+                <artifactId>rocksdbjni</artifactId>
+                <version>${rocksdb.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>junit</groupId>
+                        <artifactId>junit</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
+            <!-- Google Protobuf -->
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java-util</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+
+            <!-- JCIP -->
+            <dependency>
+                <groupId>net.jcip</groupId>
+                <artifactId>jcip-annotations</artifactId>
+                <version>${jcip.version}</version>
+            </dependency>
+
+            <!-- gRPC -->
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-netty</artifactId>
+                <version>${grpc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-protobuf</artifactId>
+                <version>${grpc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-stub</artifactId>
+                <version>${grpc.version}</version>
+            </dependency>
+
+            <!-- Common proto -->
+            <dependency>
+                <groupId>com.google.api.grpc</groupId>
+                <artifactId>googleapis-common-protos</artifactId>
+                <version>${commonproto.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- Build -->
+    <build>
+    </build>
+
+    <!-- Git -->
+    <scm>
+    </scm>
+
+
+</project>
